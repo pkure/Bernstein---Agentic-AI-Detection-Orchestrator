@@ -1,0 +1,25 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local config / secrets — these contain real IPs and tokens, never commit them
+config_local.py
+config.local.py
+.env
+.env.*
+!.env.example
+
+# SSH keys (in case any land in the project directory)
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+known_hosts
+
+# Logs
+logs/
+*.log
+
+# VS Code workspace file
+*.code-workspace

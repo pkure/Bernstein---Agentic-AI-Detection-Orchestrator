@@ -1,0 +1,32 @@
+# config_local.py — copy this file to config_local.py and fill in your values
+# This file is gitignored — real IPs and tokens are never committed.
+
+# Your host machine's IP on the lab network (e.g. the VMware host-only adapter IP).
+# This IP is blocked by safety.py so Bernstein can never target the machine it runs on.
+HOST_IP = "192.168.X.1"
+
+# Your host machine's hostname — also blocked.
+BLOCKED_HOSTS = ["127.0.0.1", "localhost", "YOUR-HOSTNAME"]
+
+# Map VM aliases to their IPs on the lab network.
+ALLOWED_HOSTS = {
+    "ubuntulab":  "192.168.X.Y",   # Zeek / Snort / auditd / SiLK sensor
+    "splunksiem": "192.168.X.Y",   # Splunk Enterprise
+    "dc01":       "192.168.X.Y",   # Windows Domain Controller
+    "ws01":       "192.168.X.Y",   # Windows Workstation
+    "parrot":     "192.168.X.Y",   # Attacker VM
+}
+
+# SSH username for each VM. Falls back to SSH_USER in config.py if omitted.
+SSH_USERS = {
+    "ubuntulab":  "your-user",
+    "splunksiem": "your-user",
+    "parrot":     "your-user",
+    "dc01":       "your-user",
+    "ws01":       "your-user",
+}
+
+# Splunk REST API token.
+# Create one in Splunk Web → Settings → Tokens → New Token.
+# Tokens expire ~30 days after creation — regenerate if Splunk tools return auth errors.
+SPLUNK_TOKEN = "eyJ..."
