@@ -25,7 +25,7 @@ Bernstein treats those sources as a single unified interface. The question that 
 
 ## Demo
 
-> *Screenshots from a live lab session. Attack simulation via Hydra brute-force → successful SSH → lateral movement attempt.*
+> *Screenshots from a live lab session. Port scan, brute force, process creation, and system processes checks are examples of automated checks Bernstein can carry out.*
 
 | | |
 |---|---|
@@ -34,8 +34,8 @@ Bernstein treats those sources as a single unified interface. The question that 
 
 | | |
 |---|---|
-| ![Admin checks](assets/process_creation2.png) | ![Service checks](assets/services.png) |
-| *Bernstein queries Splunk for Windows Sysmon EventCode 1 (process creation) across all Windows VMs — shows real execution data including full command lines, spawning parent processes, and execution context pulled from the Sysmon → Splunk Universal Forwarder pipeline* | *System and services checks, basic administrative functions can be carried out* |
+| ![Admin checks](assets/process_creation2.png) | ![Service checks](assets/sweep.png) |
+| *Bernstein queries Splunk for Windows Sysmon EventCode 1 (process creation) across all Windows VMs — shows real execution data including full command lines, spawning parent processes, and execution context pulled from the Sysmon → Splunk Universal Forwarder pipeline* | *The 'sweep' command will check accessibility of lab VMs, Bernstein can also SSH to lab machines and carry out basic administrative CLI functions* |
 
 ---
 
