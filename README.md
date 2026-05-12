@@ -29,13 +29,13 @@ Bernstein treats those sources as a single unified interface. The question that 
 
 | | |
 |---|---|
-| ![Brute force detection](docs/screenshots/brute_force.png) | ![Port scan correlation](docs/screenshots/port_scan.png) |
+| ![Brute force detection](assets/brute_force.png) | ![Port scan correlation](assets/port_scan.png) |
 | *Bernstein correlates failed login spikes in Splunk (EventCode 4625) with Zeek conn.log to identify whether any attempts succeeded* | *Port scan detected via Snort signatures, Zeek notice.log, and Sysmon EventCode 3 on Windows VMs — three independent confirmation sources* |
 
 | | |
 |---|---|
-| ![Admin confirmation gate](docs/screenshots/admin_confirm.png) | ![Triage follow-up](docs/screenshots/triage.png) |
-| *Tier 2 admin actions (service restart, file read) shown for approval before execution — exact command displayed* | *Triage step automatically pivots from auditd EXECVE findings to Zeek HTTP log to trace what was fetched* |
+| ![Admin checks](assets/process_creation.png) | ![Triage follow-up](docs/screenshots/triage.png) |
+| *Tier 2 admin actions (process checks, system info) shown for approval before execution — exact command displayed* | *Triage step automatically pivots from auditd EXECVE findings to Zeek HTTP log to trace what was fetched* |
 
 ---
 
