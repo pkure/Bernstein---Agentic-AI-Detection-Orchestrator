@@ -34,7 +34,7 @@ Bernstein treats those sources as a single unified interface. The question that 
 
 | | |
 |---|---|
-| ![Admin checks](assets/process_creation2.png) | ![Service checks](assets/sweep.png) |
+| ![Admin checks](assets/process_creation2.png) | ![Sweep](assets/sweep.png) |
 | *Bernstein queries Splunk for Windows Sysmon EventCode 1 (process creation) across all Windows VMs — shows real execution data including full command lines, spawning parent processes, and execution context pulled from the Sysmon → Splunk Universal Forwarder pipeline* | *The 'sweep' command will check accessibility of lab VMs, Bernstein can also SSH to lab machines and carry out basic administrative CLI functions* |
 
 ---
