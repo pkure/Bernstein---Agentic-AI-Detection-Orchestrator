@@ -34,7 +34,7 @@ Bernstein treats those sources as a single unified interface. The question that 
 
 | | |
 |---|---|
-| ![Admin checks](assets/process_creation.png) | ![Service checks](assets/services.png) |
+| ![Admin checks](assets/process_creation2.png) | ![Service checks](assets/services.png) |
 | *Bernstein queries Splunk for Windows Sysmon EventCode 1 (process creation) across all Windows VMs — shows real execution data including full command lines, spawning parent processes, and execution context pulled from the Sysmon → Splunk Universal Forwarder pipeline* | *System and services checks, basic administrative functions can be carried out* |
 
 ---
