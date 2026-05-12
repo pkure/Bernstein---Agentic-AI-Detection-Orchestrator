@@ -43,75 +43,8 @@ Bernstein treats those sources as a single unified interface. The question that 
 
 The agent runs a structured loop with two execution rounds separated by a triage step. This is what enables correlated analysis rather than just parallel queries.
 
-```
-You type a question
-       │
-       ▼
-┌─────────────────────────────────────────────┐
-│  Keyword Planner (deterministic, ~0ms)       │
-│                                              │
-│  Common patterns handled without LLM:        │
-│  "failed login"  → splunk_failed_logins      │
-│  "port scan"     → snort + zeek + sysmon     │
-│  "brute force"   → splunk_failed_logins +    │
-│                    failed_logins (Linux)      │
-│                                              │
-│  Falls through to LLM for complex queries    │
-└───────────────┬─────────────────────────────┘
-                │ no keyword match
-                ▼
-┌─────────────────────────────────────────────┐
-│  LLM Planner (Ollama — local, no API call)  │
-│                                              │
-│  Reads tool manifest, returns JSON:          │
-│  {"tool_calls": [{"tool": "zeek_conn_log",  │
-│    "host": "ubuntulab", "params": {...}}]}   │
-│                                              │
-│  Fuzzy-matched against real tool names to   │
-│  catch LLM hallucinations                    │
-└───────────────┬─────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────────────────┐
-│  Confirmation Gate                           │
-│                                              │
-│  Tier 1 (read-only)   → runs automatically  │
-│  Tier 2 (admin)       → shows action, y/N   │
-│  Tier 3 (destructive) → requires "yes"      │
-└───────────────┬─────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────────────────┐
-│  Execute Round 1                             │
-│  SSH → Linux VMs │ REST API → Splunk        │
-│  PowerShell-over-SSH → Windows VMs          │
-└───────────────┬─────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────────────────┐
-│  Triage (LLM — only runs if real data found)│
-│                                              │
-│  "splunk_failed_logins shows 47 attempts    │
-│   from 192.168.x.x — follow up with         │
-│   zeek_conn_log to check if any succeeded"  │
-│                                              │
-│  Returns follow-up tool_calls[] or []       │
-└───────────────┬─────────────────────────────┘
-                │ if follow-ups planned
-                ▼
-┌─────────────────────────────────────────────┐
-│  Execute Round 2 (confirmation-gated)        │
-└───────────────┬─────────────────────────────┘
-                │
-                ▼
-┌─────────────────────────────────────────────┐
-│  Synthesize                                  │
-│  Correlates all findings across sources,    │
-│  maps to MITRE ATT&CK where evidence        │
-│  supports it, returns verdict:               │
-│  CONCERNING / NORMAL / INCONCLUSIVE         │
-└─────────────────────────────────────────────┘
-```
+![Architecture](assets/architecture.png)
+
 
 The **triage step** is the differentiating capability. Without it, this is a query dispatcher. With it, Bernstein notices SSH brute force in auditd logs and automatically checks Zeek conn.log to see whether any of those attempts succeeded — before forming its final answer.
 
