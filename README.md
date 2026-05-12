@@ -30,12 +30,12 @@ Bernstein treats those sources as a single unified interface. The question that 
 | | |
 |---|---|
 | ![Brute force detection](assets/brute_force.png) | ![Port scan correlation](assets/port_scan.png) |
-| *Bernstein correlates failed login spikes in Splunk (EventCode 4625) with Zeek conn.log to identify whether any attempts succeeded* | *Port scan detected via Snort signatures, Zeek notice.log, and Sysmon EventCode 3 on Windows VMs — three independent confirmation sources* |
+| *Bernstein queries Splunk (EventCode 4625) and the Windows Security event log directly over SSH, detecting 10 failed NTLM authentication attempts targeting user 'pedro' from attacker VM 192.168.93.12 — MITRE T1110.001 Brute Force* | *Port scan detected via Snort signatures, Zeek notice.log, and Sysmon EventCode 3 on Windows VMs — three independent confirmation sources* |
 
 | | |
 |---|---|
-| ![Admin checks](assets/process_creation.png) | ![Triage follow-up](docs/screenshots/triage.png) |
-| *Tier 2 admin actions (process checks, system info) shown for approval before execution — exact command displayed* | *Triage step automatically pivots from auditd EXECVE findings to Zeek HTTP log to trace what was fetched* |
+| ![Admin checks](assets/process_creation.png) | ![Service checks](assets/services.png) |
+| *Bernstein queries Splunk for Windows Sysmon EventCode 1 (process creation) across all Windows VMs — shows real execution data including full command lines, spawning parent processes, and execution context pulled from the Sysmon → Splunk Universal Forwarder pipeline* | *System and services checks, basic administrative functions can be carried out* |
 
 ---
 
